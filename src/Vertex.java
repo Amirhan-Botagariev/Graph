@@ -20,4 +20,10 @@ public class Vertex<V> {
         this.data = data;
         this.adjVertex = new HashMap<>();
     }
+
+    @Override
+    public String toString() {
+        return "Vertex " +
+                this.data;
+    }
 }
