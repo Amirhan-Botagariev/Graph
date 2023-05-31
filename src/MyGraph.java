@@ -16,5 +16,13 @@ public class MyGraph<V> {
         adjacencyList.get(source).add(edge);
     }
 
+    public List<Edge<V>> getEdges(Vertex<V> vertex) {
+        return adjacencyList.get(vertex);
+    }
+
+    public Set<Vertex<V>> getVertices() {
+        return adjacencyList.keySet();
+    }
+
 
 }
