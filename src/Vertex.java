@@ -8,5 +8,13 @@ public class Vertex<V> {
         addAdjVertex(destination, weight);
     }
 
-    
+    public Map<Vertex<V>, Double> getAdjVertex(){
+        return adjVertex;
+    }
+
+    public V getData(){
+        return data;
+    }
+
+
 }
