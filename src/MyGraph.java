@@ -24,5 +24,27 @@ public class MyGraph<V> {
         return adjacencyList.keySet();
     }
 
+    public void bfs(Vertex<V> start) {
+        Set<Vertex<V>> visited = new HashSet<>();
+        Queue<Vertex<V>> queue = new LinkedList<>();
+
+        visited.add(start);
+        queue.offer(start);
+
+        while (!queue.isEmpty()) {
+            Vertex<V> currentVertex = queue.poll();
+            System.out.println(currentVertex);
+
+            List<Edge<V>> edges = getEdges(currentVertex);
+            for (Edge<V> edge : edges) {
+                Vertex<V> neighbor = edge.getDestination();
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    queue.offer(neighbor);
+                }
+            }
+        }
+    }
+
 
 }
