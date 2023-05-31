@@ -185,7 +185,130 @@ public void setWeight(double weight) {
   
 ### Sets the weight of the edge.
 
+# MyGraph
 
+- Methods
+    - addVertex()
+    - addEdge()
+    - getEdges()
+    - getVertices()
+    - bfs(Vertex<V> start)
+    - dijkstra(Vertex<V> start)
+  
+ ## Fields and constructor:
+
+ ```java
+  private Map<Vertex<V>, List<Edge<V>>> adjacencyList;
+
+    public MyGraph() {
+        adjacencyList = new HashMap<>();
+    }
+ ```
+ 
+## addVertex() 
+
+```java
+public void addVertex(Vertex<V> vertex) {
+        adjacencyList.put(vertex, new ArrayList<>());
+    }
+```
+
+## addEdge() 
+
+```java
+public void addEdge(Vertex<V> source, Vertex<V> destination, double weight) {
+        Edge<V> edge = new Edge<>(source, destination, weight);
+        adjacencyList.get(source).add(edge);
+    }
+```
+
+### This method adds an edge between two vertices in the graph with the given source, destination, and weight.
+
+## getEdge() 
+
+```java
+public List<Edge<V>> getEdges(Vertex<V> vertex) {
+        return adjacencyList.get(vertex);
+    }
+```
+
+### This method returns a list of all edges in the graph.
+
+## getVertices() 
+
+```java
+public Set<Vertex<V>> getVertices() {
+        return adjacencyList.keySet();
+    }
+```
+
+### This method returns a list of all vertices in the graph.
+
+## bfs(Vertex<V> start) 
+
+```java
+public void bfs(Vertex<V> start) {
+        Set<Vertex<V>> visited = new HashSet<>();
+        Queue<Vertex<V>> queue = new LinkedList<>();
+
+        visited.add(start);
+        queue.offer(start);
+
+        while (!queue.isEmpty()) {
+            Vertex<V> currentVertex = queue.poll();
+            System.out.println(currentVertex);
+
+            List<Edge<V>> edges = getEdges(currentVertex);
+            for (Edge<V> edge : edges) {
+                Vertex<V> neighbor = edge.getDestination();
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    queue.offer(neighbor);
+                }
+            }
+        }
+    }
+```
+
+### This method performs a breadth-first search starting from the specified start vertex.
+
+## bfs(Vertex<V> start) 
+
+```java
+public void dijkstra(Vertex<V> start) {
+        PriorityQueue<Vertex<V>> priorityQueue = new PriorityQueue<>(Comparator.comparingDouble(Vertex::getDistance));
+        Set<Vertex<V>> visited = new HashSet<>();
+
+        start.setDistance(0);
+        priorityQueue.offer(start);
+
+        while (!priorityQueue.isEmpty()) {
+            Vertex<V> currentVertex = priorityQueue.poll();
+            visited.add(currentVertex);
+
+            List<Edge<V>> edges = getEdges(currentVertex);
+            for (Edge<V> edge : edges) {
+                Vertex<V> neighbor = edge.getDestination();
+                double newDistance = currentVertex.getDistance() + edge.getWeight();
+                if (newDistance < neighbor.getDistance()) {
+                    neighbor.setDistance(newDistance);
+                    neighbor.setPrevious(currentVertex);
+                }
+
+                if (!visited.contains(neighbor)) {
+                    priorityQueue.offer(neighbor);
+                }
+            }
+        }
+    }
+```
+
+### This method performs Dijkstra's algorithm starting from the specified source vertex to find the shortest paths to all other vertices in the graph.
+
+
+
+
+ 
   
   
   
