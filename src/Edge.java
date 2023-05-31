@@ -9,4 +9,17 @@ public class Edge<V> {
         this.weight = weight;
     }
 
+    public Vertex getSource(){
+        return source;
+    }
+
+    public Vertex<V> getDestination() {
+        return destination;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+
 }
