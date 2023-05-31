@@ -46,5 +46,30 @@ public class MyGraph<V> {
         }
     }
 
+    public void dijkstra(Vertex<V> start) {
+        PriorityQueue<Vertex<V>> priorityQueue = new PriorityQueue<>(Comparator.comparingDouble(Vertex::getDistance));
+        Set<Vertex<V>> visited = new HashSet<>();
 
+        start.setDistance(0);
+        priorityQueue.offer(start);
+
+        while (!priorityQueue.isEmpty()) {
+            Vertex<V> currentVertex = priorityQueue.poll();
+            visited.add(currentVertex);
+
+            List<Edge<V>> edges = getEdges(currentVertex);
+            for (Edge<V> edge : edges) {
+                Vertex<V> neighbor = edge.getDestination();
+                double newDistance = currentVertex.getDistance() + edge.getWeight();
+                if (newDistance < neighbor.getDistance()) {
+                    neighbor.setDistance(newDistance);
+                    neighbor.setPrevious(currentVertex);
+                }
+
+                if (!visited.contains(neighbor)) {
+                    priorityQueue.offer(neighbor);
+                }
+            }
+        }
+    }
 }
