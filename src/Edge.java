@@ -21,5 +21,15 @@ public class Edge<V> {
         return weight;
     }
 
+    public void setSource(Vertex<V> source) {
+        this.source = source;
+    }
 
+    public void setDestination(Vertex<V> destination) {
+        this.destination = destination;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
 }
